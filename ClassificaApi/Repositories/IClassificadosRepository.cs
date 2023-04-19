@@ -9,5 +9,6 @@ namespace ClassificaApi.Repositories
         Task<Classificados> Create (Classificados classificados);
         Task Update(Classificados classificados);
         Task Delete(int Id);
+        
     }
 }

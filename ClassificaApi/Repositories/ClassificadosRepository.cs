@@ -1,5 +1,6 @@
 ﻿using ClassificaApi.Model;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 using System.Threading.Tasks;
 
 namespace ClassificaApi.Repositories
@@ -40,6 +41,14 @@ namespace ClassificaApi.Repositories
         {
             _context.Entry(classificados).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+        }
+
+        public async Task GetNow(Classificados classificados) 
+        {
+            string formataData = DateTime.Now.ToString("dd/MM/yyyy");
+            DateTime data = DateTime.ParseExact(formataData, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            classificados.DataHora = data;
+            await _context.SaveChangesAsync();  
         }
 
 

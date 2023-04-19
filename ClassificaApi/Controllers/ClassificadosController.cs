@@ -1,10 +1,13 @@
 ﻿using ClassificaApi.Model;
 using ClassificaApi.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 
 namespace ClassificaApi.Controllers
 {
     [Route("api/[controller]")]
+    [Consumes("application/json")]
+    [Produces("application/json")]
     [ApiController]
     public class ClassificadosController : ControllerBase
     {
@@ -27,6 +30,7 @@ namespace ClassificaApi.Controllers
         public async  Task<ActionResult<Classificados>> PostClassificados([FromBody] Classificados classificados) 
         {
             var newClassificados = await _classificadosRepository.Create(classificados);
+            
 
             return CreatedAtAction(nameof(GetClassificados),new {id = newClassificados.Id},newClassificados);
         }
