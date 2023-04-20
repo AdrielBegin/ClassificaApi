@@ -44,11 +44,8 @@ namespace ClassificaApi.Repositories
         }
 
         public async Task GetNow(Classificados classificados) 
-        {
-            string formataData = DateTime.Now.ToString("dd/MM/yyyy");
-            DateTime data = DateTime.ParseExact(formataData, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            classificados.DataHora = data;
-            await _context.SaveChangesAsync();  
+        {          
+          await _context.SaveChangesAsync();
         }
 
 

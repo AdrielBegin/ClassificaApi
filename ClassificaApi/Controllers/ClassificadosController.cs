@@ -30,7 +30,8 @@ namespace ClassificaApi.Controllers
         public async  Task<ActionResult<Classificados>> PostClassificados([FromBody] Classificados classificados) 
         {
             var newClassificados = await _classificadosRepository.Create(classificados);
-            
+            //DateTime localDate = DateTime.Now;
+            //localDate.AddDays(2); 
 
             return CreatedAtAction(nameof(GetClassificados),new {id = newClassificados.Id},newClassificados);
         }

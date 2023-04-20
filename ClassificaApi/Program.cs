@@ -16,7 +16,7 @@ builder.Services.AddCors();
 // Conexão
 var connectionString = builder.Configuration.GetConnectionString("Jornal");
 
-builder.Services.AddEntityFrameworkSqlServer().AddDbContext<ClassificaContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddEntityFrameworkSqlServer().AddDbContext<ClassificaContext>(options =>   options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<IClassificadosRepository, ClassificadosRepository>();
 // Controller
