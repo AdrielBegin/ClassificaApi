@@ -22,35 +22,48 @@ namespace ClassificaApi.Controllers
             return await _classificadosRepository.Get();
         }
         [HttpGet("{Id}")]
-        public async Task<ActionResult<Classificados>> GetClassificados( int Id)
+        public async Task<ActionResult<Classificados>> GetClassificados(int Id)
         {
             return await _classificadosRepository.Get(Id);
         }
         [HttpPost]
-        public async  Task<ActionResult<Classificados>> PostClassificados([FromBody] Classificados classificados) 
+        public async Task<ActionResult<Classificados>> PostClassificados([FromBody] Classificados classificados)
         {
             var newClassificados = await _classificadosRepository.Create(classificados);
-            //DateTime localDate = DateTime.Now;
-            //localDate.AddDays(2); 
 
-            return CreatedAtAction(nameof(GetClassificados),new {id = newClassificados.Id},newClassificados);
+
+            return CreatedAtAction(nameof(GetClassificados), new { id = newClassificados.Id }, newClassificados);
         }
         [HttpDelete("{Id}")]
-        public async Task<AcceptedResult> Delete(int Id) 
+        public async Task<ActionResult> Delete(int Id)
         {
             var classificadosToDelete = await _classificadosRepository.Get(Id);
-            if (classificadosToDelete == null)
+            if (classificadosToDelete != null)
+            {
                 await _classificadosRepository.Delete(classificadosToDelete.Id);
-            return null;
-        }
-        [HttpPut]
-        public async Task<AcceptedResult> PutClassificados(int Id, [FromBody] Classificados classificados) 
-        {
-            if (Id == classificados.Id)
-                await _classificadosRepository.Update(classificados);
-            return null;
-        }
+                return NoContent();
+            }
+            else
+            {
+                return NotFound();
+            }
 
+
+        }
+        [HttpPut("{Id}")]
+        public async Task<IActionResult> PutClassificados(int Id, [FromBody] Classificados classificados) 
+        {
+            if (Id == classificados.Id) 
+            {
+                await _classificadosRepository.Update(classificados);
+                return Accepted();
+            }
+            else
+            {
+                return BadRequest("O id é diferente"); 
+            }
+
+        }
 
     }
 }

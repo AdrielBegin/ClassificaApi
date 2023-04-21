@@ -42,6 +42,7 @@ builder.WithOrigins("http://localhost:3000", "https://localhost:3000")
 .AllowCredentials()
 .WithHeaders("Authorization", "Content-Type"));
 
+app.UseHttpMethodOverride();
 app.UseRouting();
 app.UseEndpoints(endpoints => endpoints.MapControllers());
 app.UseHttpsRedirection();
