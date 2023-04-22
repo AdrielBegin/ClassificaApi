@@ -9,6 +9,7 @@ Essas instruções permitirão que você obtenha uma cópia do projeto em opera�
 ### 📋 Pré-requisitos
 ```
 Visual Studio 2022
+
 Microsoft.EntityFrameworkCore 7.0.5
 
 ```
