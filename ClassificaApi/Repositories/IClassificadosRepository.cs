@@ -6,7 +6,7 @@ namespace ClassificaApi.Repositories
     {
         Task<IEnumerable<Classificados>> Get();
         Task<Classificados> Get(int Id);        
-        Task<Classificados> Create (Classificados classificados);
+        Task<Classificados> Create(Classificados classificados);
         Task Update(Classificados classificados);
         Task Delete(int Id);
         

@@ -11,5 +11,6 @@ namespace ClassificaApi.Model
         }
         // Mapear 
         public DbSet<Classificados> Classificados { get; set; }
+        public DbSet<Usuarios> Usuarios { get; set; }
     }
 }

@@ -31,7 +31,6 @@ namespace ClassificaApi.Controllers
         {
             var newClassificados = await _classificadosRepository.Create(classificados);
 
-
             return CreatedAtAction(nameof(GetClassificados), new { id = newClassificados.Id }, newClassificados);
         }
         [HttpDelete("{Id}")]

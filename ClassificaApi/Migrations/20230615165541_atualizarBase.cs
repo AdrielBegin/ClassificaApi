@@ -5,7 +5,7 @@
 namespace ClassificaApi.Migrations
 {
     /// <inheritdoc />
-    public partial class formataData : Migration
+    public partial class atualizarBase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

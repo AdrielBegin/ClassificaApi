@@ -1,7 +1,5 @@
 ﻿using ClassificaApi.Model;
 using Microsoft.EntityFrameworkCore;
-using System.Globalization;
-using System.Threading.Tasks;
 
 namespace ClassificaApi.Repositories
 {
@@ -16,6 +14,7 @@ namespace ClassificaApi.Repositories
 
         public async Task<Classificados> Create(Classificados classificados)
         {
+            classificados.inserirData();
             _context.Classificados.Add(classificados);
             await _context.SaveChangesAsync();
             return classificados;
@@ -39,6 +38,7 @@ namespace ClassificaApi.Repositories
 
         public async Task Update(Classificados classificados)
         {
+            classificados.AtualizarData();
             _context.Entry(classificados).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }

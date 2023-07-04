@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClassificaApi.Migrations
 {
     [DbContext(typeof(ClassificaContext))]
-    [Migration("20230419221513_formataData")]
-    partial class formataData
+    [Migration("20230615164732_teste")]
+    partial class teste
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,10 @@ namespace ClassificaApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("DataHora")
+                    b.Property<DateTime?>("DataHoraAtualizar")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataHoraInserir")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Descricao")

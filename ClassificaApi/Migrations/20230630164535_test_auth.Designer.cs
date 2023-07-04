@@ -4,6 +4,7 @@ using ClassificaApi.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClassificaApi.Migrations
 {
     [DbContext(typeof(ClassificaContext))]
-    partial class ClassificaContextModelSnapshot : ModelSnapshot
+    [Migration("20230630164535_test_auth")]
+    partial class test_auth
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,12 +45,7 @@ namespace ClassificaApi.Migrations
                     b.Property<string>("Titulo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UsuariosId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UsuariosId");
 
                     b.ToTable("Classificados");
                 });
@@ -60,6 +58,9 @@ namespace ClassificaApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("ClassificadosId")
+                        .HasColumnType("int");
+
                     b.Property<string>("NomeUsuario")
                         .HasColumnType("nvarchar(max)");
 
@@ -71,19 +72,21 @@ namespace ClassificaApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Usuarios");
-                });
+                    b.HasIndex("ClassificadosId");
 
-            modelBuilder.Entity("ClassificaApi.Model.Classificados", b =>
-                {
-                    b.HasOne("ClassificaApi.Model.Usuarios", null)
-                        .WithMany("Classificados")
-                        .HasForeignKey("UsuariosId");
+                    b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("ClassificaApi.Model.Usuarios", b =>
                 {
-                    b.Navigation("Classificados");
+                    b.HasOne("ClassificaApi.Model.Classificados", null)
+                        .WithMany("Usuarios")
+                        .HasForeignKey("ClassificadosId");
+                });
+
+            modelBuilder.Entity("ClassificaApi.Model.Classificados", b =>
+                {
+                    b.Navigation("Usuarios");
                 });
 #pragma warning restore 612, 618
         }
